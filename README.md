@@ -16,17 +16,22 @@ df.describe()
 # Set target, features and feature_names.
 target = df["koi_disposition"]
 data = df.drop("koi_disposition", axis=1)
+# Drops labels from columns for koi_disposition
 feature_names = data.columns
+# The feature_names option is just a way to pass the names of the features for plotting. It is used for example if you want to override the column names of a panda data frame
 data.head()
+# Preview data
 
 # Create a train test split. 
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(data, target, random_state=42)
+# sklearn.model_selection.train_test_split(*arrays, test_size=None, train_size=None, random_state=None, shuffle=True, stratify=None)[source] 
 # This splits arrays into random subsets
 
 # Pre Processing
 from sklearn.preprocessing import MinMaxScaler
 X_minmax = MinMaxScaler().fit(X_train)
+# class sklearn.preprocessing.MinMaxScaler(feature_range=0, 1, *, copy=True, clip=False)
 
 X_train_minmax = X_minmax.transform(X_train)
 X_test_minmax = X_minmax.transform(X_test)
